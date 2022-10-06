@@ -8,7 +8,6 @@ class client:
             self.tcpClient = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.tcpClient.settimeout(0.001)
             self.tcpClient.connect((self.ip, self.port))
-            self.tcpClient.sendall(b'Hello, world')
             print("TCP Connection Done")
             self.isOK = True
         except:
