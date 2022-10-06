@@ -9,5 +9,7 @@ print(tcp1)
 
 while True:
     print(tcp1.connected())
-    print(tcp1.receive())
+    if tcp1.connected():
+        rcv = tcp1.receive()
+        print(rcv)
     time.sleep(3)
