@@ -1,0 +1,39 @@
+import socket
+
+class client:
+    def __init__(self, ip, port):
+        try:
+            self.ip = ip
+            self.port = port
+            self.tcpClient = socket.socket()
+            self.tcpClient.settimeout(0.001)
+            self.tcpClient.connect((self.ip, self.port))
+            print("TCP Connection Done")
+            self.isOK = True
+        except:
+            print("TCP Connection Error")
+    def connected(self):
+        try:
+            if not self.isOK:
+                self.tcpClient = socket.socket()
+                self.tcpClient.settimeout(0.001)
+                self.tcpClient.connect((self.ip, self.port))
+                self.isOK = True
+            get = self.tcpClient.getpeername()
+            return True
+        except:
+            self.isOK = False
+            return False
+    def receive(self):
+        if self.isOK:
+            try:
+                data = self.tcpClient.recv(1024).decode()
+                if data:
+                    return data
+                else: #tcp bağlantısı koptu
+                    self.isOK = False
+                    return None
+            except:
+                return ""
+        else:
+            return None
