@@ -12,4 +12,5 @@ while True:
     if tcp1.connected():
         rcv = tcp1.receive()
         print(rcv)
+        tcp1.sendData(rcv)
     time.sleep(3)
